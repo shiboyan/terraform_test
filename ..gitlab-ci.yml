@@ -51,23 +51,4 @@ plan:
   only:
     - merge_requests
 
-build:
-  stage: plan
-  script:
-    - terraform plan -out=$PLAN
-  artifacts:
-    name: plan
-    paths:
-      - $PLAN
-  only:
-    - master
 
-apply:
-  stage: apply
-  script:
-    - terraform apply -input=false $PLAN
-  dependencies:
-    - build
-  when: manual
-  only:
-    - master
