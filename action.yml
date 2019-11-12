@@ -1,7 +1,4 @@
-- name: trigger Job
-  uses: shiboyan/terraform_test@master
-  with:
-    url: "http://3.88.51.197/"
-    token: f7a135c3e8f28dffab43dc07a106d0
-    debug: true
-    project_id: 1
+trigger_build:
+  stage: deploy
+  script:
+    - "curl -X POST -F token=TOKEN -F ref=REF_NAME http://3.88.51.197/api/v4/projects/1/trigger/pipeline"
