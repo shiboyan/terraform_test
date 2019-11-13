@@ -6,7 +6,7 @@
 
 ```
 terraform init
-terraform apply
+terraform apply -var
 ```
 
 # Destroy
