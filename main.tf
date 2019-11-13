@@ -121,9 +121,9 @@ resource "aws_instance" "web" {
   # this should be on port 80
   provisioner "remote-exec" {
     scripts = [
-      #"mount_ebs.sh",
-      "install_nginx.sh",
-    ]
+      "modify_access.sh",
+      "nginx_start.sh",
+      ]
   }
   tags = {
     Name = "mina1113"
