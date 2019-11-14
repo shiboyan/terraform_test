@@ -7,5 +7,3 @@ output "ids" {
     "${aws_subnet.subnet.*.id}",
   ]
 }
-
-

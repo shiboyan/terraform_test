@@ -3,5 +3,3 @@ output "ids" {
     "${aws_instance.web.*.id}",
   ]
 }
-
-

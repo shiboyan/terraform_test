@@ -6,8 +6,9 @@
 
 ```
 terraform init
-terraform apply -var
-```
+terraform validate -var-file=aws-demo.tfvars
+terraform plan -var-file=aws-demo.tfvars
+terraform apply -var-file=aws-demo.tfvars
 
 # Destroy
 

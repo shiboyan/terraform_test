@@ -10,8 +10,11 @@ variable "availability_zone" {
   description = "put availability zone"
 }
 
-
 variable "key_name" {
+  description = "put key name"
+}
+
+variable "private_key_path" {
   description = "put key name"
 }
 

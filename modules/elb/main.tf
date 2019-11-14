@@ -2,6 +2,7 @@ resource "aws_security_group" "elb" {
   name        = "security_group_for_elb"
   description = "Used in the aws assignment"
   vpc_id      = "${var.vpc_id}"
+
   # HTTP access from anywhere
   ingress {
     from_port   = 80
@@ -25,9 +26,12 @@ resource "aws_elb" "web" {
   #subnets         = ["${aws_subnet.default.id}"]
   #subnets = "${var.subnet_id}"
   subnets = ["${var.subnet_ids}"]
- security_groups = ["${aws_security_group.elb.id}"]
+
+  security_groups = ["${aws_security_group.elb.id}"]
+
   #instances       = ["${aws_instance.web.*.id}"]
-  instances       = ["${var.instaces_web_ids}"]
+  instances = ["${var.instaces_web_ids}"]
+
   listener {
     instance_port     = 80
     instance_protocol = "http"
@@ -43,5 +47,3 @@ resource "aws_elb" "web" {
     interval            = 30
   }
 }
-
-

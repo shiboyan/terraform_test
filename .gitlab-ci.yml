@@ -1,0 +1,56 @@
+image:
+  name: hashicorp/terraform:0.11.11
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+variables:
+  DOCKER_HOST: tcp://127.0.0.1:2375/    
+
+before_script:
+  - rm -rf .terraform
+  - terraform --version
+  - sed -i '3s/my-access-key/'$AWS_ACCESS_KEY'/' terraform_test.tf
+  - sed -i '4s/my-secret-key/'$AWS_SECRET_KEY'/' terraform_test.tf
+  - echo  $aws_pem |base64 -d >./minaterraform.pem
+  - cat ./terraform_test.tf
+  - echo "availability_zone = " '"'$availability_zone'"' >./terraform_test.tfvars
+  - echo "key_name = "'"'$key_name'"' >>./terraform_test.tfvars
+  - echo "ec2_count = "$ec2_count >>./terraform_test.tfvars
+  - echo "private_key_path = "'"'$private_key_path'"' >>./terraform_test.tfvars
+  - cat ./terraform_test.tfvars
+  - terraform init -input=false
+
+stages:
+  - validate
+  - plan
+  - apply
+  - destroy
+
+validate:
+  stage: validate
+  script:
+     - terraform validate -var-file=terraform_test.tfvars
+
+plan:
+  stage: plan
+  script:
+    - terraform plan -var-file=terraform_test.tfvars -out "planfile"
+  dependencies:
+    - validate
+  artifacts:
+    paths:
+      - planfile
+
+apply:
+  stage: apply
+  script:
+    # - terraform apply -var-file=terraform_test.tfvars -input=false 
+    - terraform apply -input=false "planfile"
+  dependencies:
+    - plan
+destroy:
+  stage: destroy
+  script:
+    - terraform destroy -force
+  when: manual    
+  

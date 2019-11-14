@@ -13,7 +13,6 @@ resource "aws_security_group" "default" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-
   # outbound internet access
   egress {
     from_port   = 0
@@ -24,20 +23,25 @@ resource "aws_security_group" "default" {
 }
 
 resource "aws_instance" "web" {
-   #count = "${var.ec2_size}"
- count         = "${var.ec2_count}"
+  #count = "${var.ec2_size}"
+  count = "${var.ec2_count}"
+
   # The connection block tells our provisioner how to
   # communicate with the resource (instance)
   connection {
     # The default username for our AMI
     user = "ubuntu"
 
-    type        = "ssh"
-    private_key = "${file("./minaterraform.pem")}"
+    type = "ssh"
+
+    #private_key = "${file("./minaterraform.pem")}"
+    private_key = "${file(var.private_key_path)}"
 
     # The connection will use the local SSH agent for authentication.
   }
+
   instance_type = "t2.micro"
+
   # Lookup the correct AMI based on the region
   # we specified
   ami = "${lookup(var.amis, "ap-southeast-2")}"
@@ -62,10 +66,10 @@ resource "aws_instance" "web" {
   provisioner "remote-exec" {
     scripts = [
       "nginx_resume.sh",
-      ]
+    ]
   }
+
   tags = {
     Name = "mina_interview"
   }
 }
-
