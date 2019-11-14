@@ -15,7 +15,7 @@ This is a terraform test code that implements the following features.
 
 # GitlabCI [![Build Status](http://img.shields.io/travis/fatih/hclfmt.svg?style=flat-square)](http://3.88.51.197/root/terraform_test/pipelines)
 
-http://3.88.51.197/root/terraform_test/pipelines
+http://3.88.51.197/root/terraform_test/pipelines (This is my personal Gitlabci)
 
 I created a ci/cd pipeline to automatically deploy terraform code, set github webhook, once there's a push action happened,it will trigger automatic deployment.
 
