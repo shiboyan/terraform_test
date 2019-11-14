@@ -7,7 +7,7 @@ This is a terraform test code that implements the following features.
 - An Application Load Balancer targeting the EC2 instance.(http://aws-assignment-elb-2069037378.ap-southeast-2.elb.amazonaws.com/)
 - All the resouces use modules and input/output variables
 - EC2 instances can only access through 22 port
-- Can modify EC2 instances account and trigger ci/cd pipeline
+- Can modify EC2 instances count through variable setting and trigger ci/cd pipeline
 
 # How to  deploy
 
