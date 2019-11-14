@@ -51,6 +51,6 @@ apply:
 destroy:
   stage: destroy
   script:
-    - terraform destroy -force
+    - terraform destroy -var-file=terraform_test.tfvars -force
   when: manual    
   
