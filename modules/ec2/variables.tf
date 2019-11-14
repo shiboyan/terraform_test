@@ -3,7 +3,7 @@ variable "vpc_id" {
 }
 
 variable "subnet_id" {
-  description = "VPC id to place to subnet into"
+  description = "subnet id"
 }
 
 variable "availability_zone" {
@@ -15,12 +15,12 @@ variable "key_name" {
 }
 
 variable "private_key_path" {
-  description = "put key name"
+  description = "put private key path"
 }
 
 variable "ec2_count" {
   #default=2
-  description = "put key name"
+  description = "put ec2 count"
 }
 
 variable "amis" {
