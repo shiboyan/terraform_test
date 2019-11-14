@@ -9,5 +9,5 @@ variable "subnet_ids" {
 
 variable "instaces_web_ids" {
   type        = "list"
-  description = "List of public subnet IDs"
+  description = "List of instances IDs"
 }
