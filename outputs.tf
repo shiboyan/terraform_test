@@ -1,3 +1,4 @@
-output "address" {
-  value = "${aws_elb.web.dns_name}"
+output "elb DNS Name" {
+  value = "${module.elb.address}"
 }
+
