@@ -1,6 +1,7 @@
 provider "aws" {
   region     = "ap-southeast-2"
-  shared_credentials_file = "~/.aws/credentials"
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
 }
 
 module "vpc" {
