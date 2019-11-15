@@ -8,12 +8,6 @@ module "vpc" {
   availability_zone = "${var.availability_zone}"
 }
 
-variable "subnet_cidrs" {
-   type = "list"
-}
-variable "environment" {
-  default = ""
-}
 module "subnet" {
   source            = "modules/subnet"
   environment        = "${var.environment}"
@@ -56,4 +50,9 @@ variable "key_name" {
 variable "ec2_count" {
   default = 0
 }
-
+variable "subnet_cidrs" {
+   type = "list"
+}
+variable "environment" {
+  default = ""
+}

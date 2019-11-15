@@ -4,6 +4,8 @@ server.pem
 files/
 *.tfstate
 *.tfstate.*
+.idea
+.idea/*
 crash.log
 *.tfvars
 *_override.tf
