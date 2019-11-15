@@ -1,9 +1,33 @@
-# Create a subnet to launch our instances into
 resource "aws_subnet" "subnet" {
-  # Use az from variables we specified
-  availability_zone = "${var.availability_zone}"
   vpc_id            = "${var.vpc_id}"
+  cidr_block        = "${element(var.cidrs, count.index)}"
+  availability_zone = "${element(var.availability_zone, count.index)}"
+  count             = "${length(var.cidrs)}"
 
-  cidr_block              = "10.0.2.0/24"
-  map_public_ip_on_launch = true
+}
+
+
+
+resource "aws_route_table" "table" {
+  vpc_id = "${var.vpc_id}"
+  count  = "${length(var.cidrs)}"
+
+  tags {
+    Name        = "minasubnet_${element(var.availability_zone, count.index)}"
+    Environment = "${var.environment}"
+  }
+}
+
+
+resource "aws_route" "public_igw_route" {
+  count                  = "${length(var.cidrs)}"
+  route_table_id         = "${element(aws_route_table.table.*.id, count.index)}"
+  gateway_id             = "${var.igw_id}"
+  destination_cidr_block = "0.0.0.0/0"
+}
+
+resource "aws_route_table_association" "subnet" {
+  subnet_id      = "${element(aws_subnet.subnet.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.table.*.id, count.index)}"
+  count          = "${length(var.cidrs)}"
 }

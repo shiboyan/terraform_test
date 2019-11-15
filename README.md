@@ -4,7 +4,7 @@ This is a terraform test code that implements the following features.
 - A VPC. include a subnet, route table, and internet gateway.
 - An EC2 instance, running a web server
 - This use AWS Free Tier instance
-- An Application Load Balancer targeting the EC2 instance.(http://aws-assignment-elb-2069037378.ap-southeast-2.elb.amazonaws.com/)
+- An Application Load Balancer targeting the EC2 instance.(http://minaalb-1046960465.ap-southeast-2.elb.amazonaws.com/)
 - All the resouces use modules and input/output variables
 - EC2 instances can only access through 22 port
 - Can modify EC2 instances count through variable setting and trigger ci/cd pipeline
@@ -46,10 +46,13 @@ auto-demo.tfvars
 
 ```
 # aws-demo.tfvars
-availability_zone = "ap-southeast-2a"
-key_name= "minaterraform"  
-ec2_count = 2     //numbers of instance
-private_key_path = "xxx/xxx.pem" 
+environment = "dev"
+key_name= "minaterraform"
+ec2_count = 2 //number of ec2
+private_key_path="./minaterraform.pem"
+subnet_cidrs = ["10.172.1.0/24", "10.172.2.0/24"]
+availability_zone = ["ap-southeast-2a", "ap-southeast-2b"]
+
 ```
 
 ```bash

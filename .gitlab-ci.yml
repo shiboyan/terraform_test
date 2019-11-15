@@ -13,10 +13,12 @@ before_script:
   - sed -i '4s/my-secret-key/'$AWS_SECRET_KEY'/' terraform_test.tf
   - echo  $aws_pem |base64 -d >./minaterraform.pem
   - cat ./terraform_test.tf
-  - echo "availability_zone = " '"'$availability_zone'"' >./terraform_test.tfvars
+  - echo "availability_zone =["'"'$availability_zone1'"','"'$availability_zone2'"'"]" >./terraform_test.tfvars
   - echo "key_name = "'"'$key_name'"' >>./terraform_test.tfvars
   - echo "ec2_count = "$ec2_count >>./terraform_test.tfvars
   - echo "private_key_path = "'"'$private_key_path'"' >>./terraform_test.tfvars
+  - echo "environment=" '"'$environment'"'>>./terraform_test.tfvars
+  - echo "subnet_cidrs =["'"'$subnet_cidr1'"','"'$subnet_cidr2'"'"]" >>./terraform_test.tfvars
   - cat ./terraform_test.tfvars
   - terraform init -input=false
 

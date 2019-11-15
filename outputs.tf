@@ -1,3 +1,4 @@
-output "elb DNS Name" {
-  value = "${module.elb.address}"
+output "alb DNS Name" {
+  value = "${module.alb.address}"
 }
+

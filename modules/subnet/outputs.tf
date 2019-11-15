@@ -1,6 +1,6 @@
-output "id" {
-  value = "${aws_subnet.subnet.id}"
-}
+//output "id" {
+//  value = "${aws_subnet.subnet.id}"
+//}
 
 output "ids" {
   value = [
