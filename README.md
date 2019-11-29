@@ -1,4 +1,4 @@
-# Terraform Devops.
+# Terraform Devops
 This is a terraform test code that implements the following features.
 
 - A VPC. include a subnet, route table, and internet gateway.
