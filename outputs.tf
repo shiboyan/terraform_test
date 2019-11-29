@@ -1,4 +1,4 @@
-output "alb DNS Name" {
-  value = "${module.alb.address}"
+output "alb_dns_name" {
+  value = module.alb.address
 }
 

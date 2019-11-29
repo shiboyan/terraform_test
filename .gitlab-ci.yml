@@ -1,5 +1,5 @@
 image:
-  name: hashicorp/terraform:0.11.11
+  name: hashicorp/terraform:0.12.12
   entrypoint:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
@@ -22,6 +22,8 @@ before_script:
   - cat ./terraform_test.tfvars
   - terraform init -input=false
 
+
+
 stages:
   - validate
   - plan
@@ -32,11 +34,19 @@ validate:
   stage: validate
   script:
      - terraform validate -var-file=terraform_test.tfvars
+  only:
+    - dev0.12
+  except:
+    - master     
 
 plan:
   stage: plan
   script:
     - terraform plan -var-file=terraform_test.tfvars -out "planfile"
+  only:
+    - dev0.12
+  except:
+    - master      
   dependencies:
     - validate
   artifacts:
@@ -48,11 +58,18 @@ apply:
   script:
     # - terraform apply -var-file=terraform_test.tfvars -input=false 
     - terraform apply -input=false "planfile"
+  only:
+    - dev0.12
+  except:
+    - master      
   dependencies:
     - plan
 destroy:
   stage: destroy
   script:
     - terraform destroy -var-file=terraform_test.tfvars -force
+  only:
+    - dev0.12
+  except:
+    - master      
   when: manual    
-  

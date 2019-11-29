@@ -1,7 +1,7 @@
 resource "aws_security_group" "default" {
   name        = "security_group_for_ec2"
   description = "Used in the aws assignment"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 22
@@ -26,26 +26,27 @@ resource "aws_security_group" "default" {
 
 resource "aws_instance" "web" {
   associate_public_ip_address =true
-  count = "${var.ec2_count}"
+  count = var.ec2_count
 
   connection {
+    host = self.public_ip
     user = "ubuntu"
 
     type = "ssh"
 
-    private_key = "${file(var.private_key_path)}"
+    private_key = file(var.private_key_path)
 
   }
 
   instance_type = "t2.micro"
-  ami = "${lookup(var.amis, "ap-southeast-2")}"
+  ami = lookup(var.amis, "ap-southeast-2")
 
-  key_name = "${var.key_name}"
+  key_name = var.key_name
 
-  vpc_security_group_ids = ["${aws_security_group.default.id}"]
+  vpc_security_group_ids = [aws_security_group.default.id]
 
 
-  subnet_id = "${var.subnet_ids[0]}"
+  subnet_id = var.subnet_ids[0]
 
 
   provisioner "remote-exec" {

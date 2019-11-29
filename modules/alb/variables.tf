@@ -8,6 +8,6 @@ variable "subnet_ids" {
 }
 
 variable "instaces_web_ids" {
-  type        = "list"
+  type    = "list"
   description = "List of instances IDs"
 }
