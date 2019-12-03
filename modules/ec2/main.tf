@@ -39,7 +39,8 @@ resource "aws_instance" "web" {
   }
 
   instance_type = "t2.micro"
-  ami = lookup(var.amis, "ap-southeast-2")
+//  ami = lookup(var.amis, "ap-southeast-2")
+  ami = data.aws_ami.ubuntu.id
 
   key_name = var.key_name
 

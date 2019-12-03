@@ -4,7 +4,7 @@ This is a terraform test code that implements the following features.
 - A VPC. include a subnet, route table, and internet gateway.
 - An EC2 instance, running a web server
 - This use AWS Free Tier instance
-- An Application Load Balancer targeting the EC2 instance.(http://minaalb-65473996.ap-southeast-2.elb.amazonaws.com/)
+- An Application Load Balancer targeting the EC2 instance.(http://minaalb-1768595218.ap-southeast-2.elb.amazonaws.com/)
 - All the resouces use modules and input/output variables
 - EC2 instances can only access through 22 port
 - Can modify EC2 instances count through variable setting and trigger ci/cd pipeline
@@ -72,6 +72,7 @@ Please note that we don't need auto-demo.tfvars this file for cicd pipeline, bec
 
 ```
 # aws-demo.tfvars
+aws_region= "ap-southeast-2"
 availability_zone =["ap-southeast-2a","ap-southeast-2b"]
 key_name = "minaterraform"
 ec2_count = 2 //number of ec2 instances

@@ -25,12 +25,3 @@ variable "ec2_count" {
   description = "put ec2 count"
 }
 
-variable "amis" {
-  type = "map"
-
-  default = {
-    ap-southeast-2 = "ami-00a54827eb7ffcd3c"
-    ap-southeast-2 = "ami-0328aad0f6218c429"
-
-  }
-}

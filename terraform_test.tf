@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "ap-southeast-2"
+  region = var.aws_region
   access_key = "my-access-key"
   secret_key = "my-secret-key"
   #shared_credentials_file = "~/.aws/credentials"
@@ -37,6 +37,9 @@ module "alb" {
   instaces_web_ids = module.ec2.ids
 }
 
+variable "aws_region" {
+  type = "string"
+}
 variable "availability_zone" {
   type = "list"
 }
